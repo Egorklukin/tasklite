@@ -1,0 +1,31 @@
+.form-add {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    justify-content: center;
+    padding-bottom: 16px;
+}
+
+.form-add input {
+    width: 100%;
+    margin: 12px 20px;
+    font-size: 14px;
+    border: 1px solid rgba(30, 10, 60, 0.12);
+    border-radius: 8px;
+    background-color: white;
+}
+
+.form-add input::placeholder {
+    color: #9b96a6;
+}
+
+.form-add__btn {
+    margin: 12px 45px;
+    border: 1px solid rgba(30, 10, 60, 0.12);
+    border-radius: 8px;
+    font-weight: 600;
+    color: white;
+    font-size: 14px;
+    background-color: #7e66cd;
+    cursor: pointer;
+}
