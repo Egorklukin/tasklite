@@ -102,3 +102,26 @@ body {
         linear-gradient(#f6f3f9, #fbfaf8);
     background-attachment: fixed;
 }
+
+.title {
+    font-size: 22px;
+    font-weight: 600;
+    margin: 28px 0 20px;
+}
+
+.tabs__item {
+    padding: 10px 13px;
+    border: 1px solid rgba(30, 10, 60, 0.12);
+    border-radius: 8px;
+    background: white;
+    font-size: 14px;
+    font-weight: 500;
+    color: #5e5472;
+    cursor: pointer;
+}
+
+.tabs__item--active {
+    background: #efeaff;
+    border: #cfc6f5;
+    color: #735cc6;
+}
