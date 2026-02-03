@@ -170,3 +170,14 @@ body {
     margin-bottom: 5px;
     color: #221c2a;
 }
+
+.task__meta {
+  font-size: 12px;
+  color: #8a8398;
+}
+
+.task__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
