@@ -126,68 +126,35 @@ body {
     color: #735cc6;
 }
 
-/* .toolbar {
+.toolbar {
     display: flex;
+    flex-direction: row;
+    justify-content: space-around;
     align-items: center;
-    justify-content: space-between;
     gap: 12px;
     margin-bottom: 15px;
 }
 
 .toolbar__input {
-    flex: 1;
+    width: 100%;
     padding: 12px 20px;
     font-size: 14px;
     border: 1px solid rgba(30, 10, 60, 0.12);
     border-radius: 8px;
-    background-color: #ffffff;
-    transition: border-color 0.2s ease;
-}
-
-.toolbar__input::placeholder {
-    color: #9b96a6;
+    background: white;
 }
 
 .toolbar__input:hover {
-    border-color: rgba(30, 10, 60, 0.2);
+    border: 1px solid rgba(30, 10, 60, 0.2);
 }
-
-.toolbar__input:focus {
+.toolbar__input:focus-visible {
     outline: none;
     border-color: #7e66cd;
-    box-shadow: 0 0 0 3px rgba(126, 102, 205, 0.28);
+    box-shadow: 0 0 0 3 px rgba(126, 102, 205, 0.28);
 }
-
-.toolbar__tabs {
-    display: flex;
-    gap: 8px; }
-.tabs__item {
-    padding: 8px 16px;
-    border: 1px solid rgba(30, 10, 60, 0.12);
-    border-radius: 8px;
-    background: white;
-    font-size: 14px;
-    font-weight: 500;
-    color: #5e5472;
-    cursor: pointer;
-    transition: all 0.2s ease;
+.toolbar__input::placeholder {
+    color: #9b96a6;
 }
-
-.tabs__item--active {
-    background: #efeaff;
-    border-color: #cfc6f5;
-    color: #735cc6;
-}
-
-.toolbar__sort {
-    padding: 12px 16px;
-    font-size: 14px;
-    border: 1px solid rgba(30, 10, 60, 0.12);
-    border-radius: 8px;
-    background-color: white;
-    color: #374151;
-    cursor: pointer;
-} */
 
 .task {
     padding: 10px 12px;
