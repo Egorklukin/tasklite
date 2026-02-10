@@ -147,11 +147,13 @@ body {
 .toolbar__input:hover {
     border: 1px solid rgba(30, 10, 60, 0.2);
 }
+
 .toolbar__input:focus-visible {
     outline: none;
     border-color: #7e66cd;
     box-shadow: 0 0 0 3 px rgba(126, 102, 205, 0.28);
 }
+
 .toolbar__input::placeholder {
     color: #9b96a6;
 }
@@ -172,12 +174,56 @@ body {
 }
 
 .task__meta {
-  font-size: 12px;
-  color: #8a8398;
+    font-size: 12px;
+    color: #8a8398;
 }
 
 .task__actions {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.task__action {
+    width: 26px;
+    height: 26px;
+    border: 1px solid rgba(30, 10, 60, 0.12);
+    border-radius: 6px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.task__action:hover {
+    background: #f6f4ff;
+    border-color: rgba(30, 10, 60, 0.2);
+    box-shadow: 0 6px 12px rgba(126, 102, 205, 0.18);
+}
+
+.task__action:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(126, 102, 205, 0.22);
+}
+
+.task__action:active {
+    transform: translateY(1px);
+}
+
+.task__icon {
+  width: 14px;
+  height: 14px;
+  display: block;
+}
+.footer-controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 4px;
+}
+.footer-controls__counters {
+    font-size: 13px;
+    margin-left: 5px;
+    color: #6f6781;
 }

@@ -80,3 +80,56 @@ function taskSummary(total, done) {
 }
 
 console.log(taskSummary(6, 3))
+
+/* lesson 4*/
+
+let cities = ["Нарьян-Мар", "Уфа", "Новороссийск"]
+
+cities[1] = "Киров"
+console.log(cities)
+
+let task = {
+    id: 1,
+    title: "накормить собаку",
+    status: "активна"
+}
+console.log(task.title)
+task.status = "выполнена"
+console.log(task.status)
+
+let tasks1 = [
+    {
+        id: 1,
+        title: "накормить собаку",
+        status: "активна"
+    },
+    {
+        id: 2,
+        title: "купить лопату",
+        status: "выполнена"
+    },
+    {
+        id: 3,
+        title: "сходить в стр. магазин",
+        status: "не активна"
+    }
+]
+console.log(tasks1[0].title)
+console.log(tasks1[1].status)
+
+let user = {
+    name: "Иван",
+    tasks: tasks1
+}
+console.log(user)
+
+function findTaskByTitle(tasks, title) {
+    for (let i = 0; i < tasks.lenght; i++) {
+        if (tasks[i].title === title) {
+            return tasks[i]
+        }
+    }
+    return "Задача не найдена"
+}
+
+console.log(findTaskByTitle(tasks1, "купить лопату"))
