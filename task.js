@@ -13,13 +13,13 @@ if (title === "") {
     console.log("title: " + title)
 }
 
-let tasks = 7;
+let tasks_count = 7;
 
-if (tasks === 0) {
+if (tasks_count === 0) {
     console.log("Список пуст, можно отдыхать");
-} else if (tasks > 0 && tasks <= 3) {
+} else if (tasks_count > 0 && tasks_count <= 3) {
     console.log("Есть задачи для выполнения");
-} else if (tasks > 3) {
+} else if (tasks_count > 3) {
     console.log("Список задач переполнен");
 }
 
@@ -33,11 +33,11 @@ if (isCompleted === true) {
 
 let urgent;
 
-if (tasks > 0 && urgent > 0) {
+if (tasks_count > 0 && urgent > 0) {
     console.log("Есть срочные задачи")
-} else if (tasks > 0 && urgent === 0) {
+} else if (tasks_count > 0 && urgent === 0) {
     console.log("Задачи есть, но они не срочные")
-} else if (tasks === 0) {
+} else if (tasks_count === 0) {
     console.log("Все задачи завершены")
 }
 let isAdmin;
@@ -112,7 +112,22 @@ let tasks1 = [
         id: 3,
         title: "сходить в стр. магазин",
         status: "не активна"
-    }
+    },
+    {
+        id: 4,
+        title: "накормить кота",
+        status: "активна"
+    },
+    {
+        id: 5,
+        title: "купить топор",
+        status: "выполнена"
+    },
+    {
+        id: 6,
+        title: "сходить в хоз. магазин",
+        status: "не активна"
+    },
 ]
 console.log(tasks1[0].title)
 console.log(tasks1[1].status)
@@ -133,3 +148,97 @@ function findTaskByTitle(tasks, title) {
 }
 
 console.log(findTaskByTitle(tasks1, "купить лопату"))
+
+
+function filterByStatus(tasks, status) {
+    return tasks.filter(function (task) {
+        return task.status === status;
+    })
+}
+console.log(filterByStatus(tasks1, "активна"))
+
+function sortByTitle(tasks) {
+    tasks.sort(function(a, b) {
+        if (a.title > b.title) {
+            return 1
+        }
+        if (a.title < b.title) {
+            return -1
+        }
+        return 0
+    })
+    return tasks
+}
+
+console.log(sortByTitle(tasks1))
+
+function searchByTitle(tasks, query) {
+    let q = query.toLowerCase();
+    return tasks.filter(task =>
+        task.title.toLowerCase().indexOf(q) !== -1
+    )
+}
+
+console.log(searchByTitle(tasks1, "ку"))
+
+for (let i = 0; i < tasks1.length; i++) {
+    console.log(tasks1[i].id + ":" + tasks1[i].title)
+}
+
+for(let task of tasks1) {
+    console.log(task.id + ":" + task.title)
+}
+
+let i = 0
+let total = 0
+let active = 0
+let done = 0
+
+while (i < tasks1.length) {
+    total++
+    if (tasks1[i].status === "выполнена") {
+        done++
+    } else {
+        active++
+    }
+    i++
+}
+
+console.log("Всего: " + total + " | Активных: " + active + " | Выполненых: " + done)
+
+for (let task of tasks1) {
+    if (task.status === "активна") {
+        console.log("Активная задача: " + task.title)
+    }
+}
+
+tasks1.forEach(task => {
+    console.log("#" + task.id + " " + task.title + " (" + task.status + ")")
+})
+
+let searchTitle = "купить лопату"
+let found = null
+for (let task of tasks1) {
+    if (task.title === searchTitle) {
+        found = task
+        break
+    }
+}
+
+if (found) {
+    console.log("Найденая задача: ", found)
+} else {
+    console.log("Задача не найдена")
+}
+
+function findTaskByKeyword(tasks, keyword) {
+  const lowerKeyword = keyword.toLowerCase()
+  for (const task of tasks) {
+    if (task.title.toLowerCase().includes(lowerKeyword)) {
+      return task;
+    }
+  }
+  return "Задача не найдена"
+}
+
+console.log(findTaskByKeyword(tasks1, "соба"))
