@@ -1,49 +1,48 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/normalize.css">
-    <link rel="stylesheet" href="styles/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/normalize.css" />
+    <link rel="stylesheet" href="styles/style.css" />
     <title>Document</title>
-</head>
+  </head>
 
-<body class="todo">
+  <body class="todo">
     <header class="header__container header container">
-        <div class="header__container">
-            <h3 class="header__title">
-                TaskLite
-            </h3>
-        </div>
-        <nav class="tabs">
-            <a href="index.html" class="tab active">To Do</a>
-            <a href="kanban.html" class="tab">Kanban</a>
-            <a href="habits.html" class="tab">Привычки</a>
-        </nav>
+      <div class="header__container">
+        <h3 class="header__title">TaskLite</h3>
+      </div>
+      <nav class="tabs">
+        <a href="index.html" class="tab active">To Do</a>
+        <a href="kanban.html" class="tab">Kanban</a>
+        <a href="habits.html" class="tab">Привычки</a>
+      </nav>
     </header>
     <main class="container">
-        <h1 class="title">
-            Задачи
-        </h1>
-        <form class="form-add">
-            <input type="text" class="form-add__input" placeholder="Введите задачу">
-            <button class="form-add__btn" type="submit">Добавить</button>
-        </form>
-        <div class="toolbar">
-            <input type="text" class="toolbar__input" placeholder="Поиск задач">
-            <div class="tabs toolbar__tabs">
-                <button class="tabs__item tabs__item--active">Все</button>
-                <button class="tabs__item">Активные</button>
-                <button class="tabs__item">Завершенные</button>
-            </div>
-            <select class="toolbar__sort">
-                <option value="new">Сначала новые</option>
-                <option value="old">Сначала старые</option>
-            </select>
+      <h1 class="title">Задачи</h1>
+      <form class="form-add">
+        <input
+          type="text"
+          class="form-add__input"
+          placeholder="Введите задачу"
+        />
+        <button class="form-add__btn" type="submit">Добавить</button>
+      </form>
+      <div class="toolbar">
+        <input type="text" class="toolbar__input" placeholder="Поиск задач" />
+        <div class="tabs toolbar__tabs">
+          <button class="tabs__item tabs__item--active">Все</button>
+          <button class="tabs__item">Активные</button>
+          <button class="tabs__item">Завершенные</button>
         </div>
-        <div class="tasks"></div>
-        <!-- <section class="task">
+        <select class="toolbar__sort">
+          <option value="new">Сначала новые</option>
+          <option value="old">Сначала старые</option>
+        </select>
+      </div>
+      <div class="tasks"></div>
+      <!-- <section class="task">
             <div class="task__content">
                 <div class="task__title">Пример задачи</div>
                 <div class="task__meta">26.09.2025, 15:49</div>
@@ -68,19 +67,20 @@
                 </button>
             </div>
         </section> -->
-        <div class="footer-controls">
-            <div class="footer-controls__counters">
-                <span>Всего: 1</span>
-                <span>Активных: 1</span>
-                <span>Выполненных: 0</span>
-            </div>
-            <button class="button button--clear footer-controls__clear" type="button">
-                Очистить выполненные
-            </button>
+      <div class="footer-controls">
+        <div class="footer-controls__counters">
+          <span>Всего: 1</span>
+          <span>Активных: 1</span>
+          <span>Выполненных: 0</span>
         </div>
-
+        <button
+          class="button button--clear footer-controls__clear"
+          type="button"
+        >
+          Очистить выполненные
+        </button>
+      </div>
     </main>
     <script src="main.js"></script>
-</body>
-
+  </body>
 </html>
