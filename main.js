@@ -7,43 +7,36 @@ const sortSelect = document.querySelector(".toolbar__sort");
 const tabButtons = document.querySelectorAll(".tabs__item");
 const clearButton = document.querySelector(".footer-controls__clear");
 const form = document.querySelector(".form-add");
-const tasks = [
-  {
-    date: "Сегодня, 10:00",
-    text: "Проверить и ответить на важные электронные письма",
-    done: true,
-  },
-  {
-    date: "Сегодня, 14:30",
-    text: "Провести встречу с командой разработки по планированию спринта",
-    done: false,
-  },
-  {
-    date: "Завтра, 09:15",
-    text: "Подготовить презентацию для клиентского совещания",
-    done: false,
-  },
-  {
-    date: "Завтра, 12:00",
-    text: "Отправить отчёт по продажам за прошлую неделю",
-    done: true,
-  },
-  {
-    date: "12 мая, 16:00",
-    text: "Обновить документацию по API",
-    done: false,
-  },
-  {
-    date: "11 мая, 13:45",
-    text: "Протестировать новую версию мобильного приложения",
-    done: true,
-  },
-  {
-    date: "Сегодня, 18:00",
-    text: "Запланировать отпуск на следующий квартал",
-    done: false,
-  },
-];
+
+let sortOrder = "new";
+let currentFilter = "all";
+
+searchInput.addEventListener("input", renderAll);
+
+tabButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    tabButtons.forEach((b) => b.classList.remove("tabs__item--active"));
+    btn.classList.add("tabs__item--active");
+
+    if (btn.textContent.includes("Активные")) currentFilter = "active";
+    else if (btn.textContent.includes("Завер")) currentFilter = "done";
+    else currentFilter = "all";
+
+    renderAll();
+  });
+});
+
+sortSelect.addEventListener("change", () => {
+  /* const val = sortSelect.value;
+  if (val.includes("новые")) sortOrder === "new";
+  else if (val.includes("старые")) sortOrder === "old";
+  else if (val.includes("A-Z")) sortOrder === "az";
+  else if (val.includes("Z-A")) sortOrder === "za"; */
+  sortOrder = sortSelect.value;
+  renderAll();
+});
+
+const tasks = [];
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -140,7 +133,29 @@ function renderTask(task) {
 
 function renderAll() {
   document.querySelectorAll(".task").forEach((t) => t.remove());
-  tasks.forEach((task) => {
+
+  let filtered = tasks.filter((task) => {
+    if (currentFilter === "active") return !task.done;
+    if (currentFilter === "done") return task.done;
+
+    return true;
+  });
+
+  const query = searchInput.value.trim().toLowerCase();
+
+  if (query) {
+    filtered = filtered.filter((task) => {
+      return task.text.toLowerCase().includes(query);
+    });
+  }
+
+  const sortedTasks = [...filtered].sort((a, b) => {
+    if (sortOrder === "new") return b.id - a.id;
+    if (sortOrder === "old") return a.id - b.id;
+    if (sortOrder === "az") return a.text > b.text ? 1 : -1;
+    if (sortOrder === "za") return a.text < b.text ? 1 : -1;
+  });
+  sortedTasks.forEach((task) => {
     const card = renderTask(task);
     footer.before(card);
   });
