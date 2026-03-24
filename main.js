@@ -36,7 +36,16 @@ sortSelect.addEventListener("change", () => {
   renderAll();
 });
 
-const tasks = [];
+const localTasks = localStorage.getItem("tasks");
+
+let tasks = JSON.parse(localTasks) || [];
+
+clearButton.addEventListener("click", () => {
+  tasks = tasks.filter((t) => !t.done);
+
+  saveTasks();
+  renderAll();
+});
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -60,9 +69,14 @@ function addTask() {
   };
   tasks.push(newTask);
   input.value = "";
-
+  saveTasks();
   renderAll();
 }
+
+function saveTasks() {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
 function renderTask(task) {
   const item = document.createElement("div");
   item.classList.add("task");
@@ -94,6 +108,7 @@ function renderTask(task) {
     const newText = prompt("Изменить задачу: ", task.text);
     if (newText && newText.trim() !== "") {
       task.text = newText.trim();
+      saveTasks();
       renderAll();
     }
     console.log(newText, task.text);
@@ -113,6 +128,7 @@ function renderTask(task) {
   deleteBtn.addEventListener("click", () => {
     const index = tasks.indexOf(task);
     tasks.splice(index, 1);
+    saveTasks();
     renderAll();
   });
 
@@ -126,6 +142,7 @@ function renderTask(task) {
     if (e.target.closest(".task__action")) return;
     task.done = !task.done;
     console.log(task.done);
+    saveTasks();
     renderAll();
   });
   return item;
@@ -159,6 +176,8 @@ function renderAll() {
     const card = renderTask(task);
     footer.before(card);
   });
+
+  updateCounters();
 }
 
 function formatterDate(date) {
@@ -169,6 +188,24 @@ function formatterDate(date) {
   const m = date.getMinutes().toString().padStart(2, "0");
 
   return `${day}.${month}.${year}, ${h}:${m}`;
+}
+
+function updateCounters() {
+  const total = tasks.length;
+  const active = tasks.filter((t) => !t.done).length;
+  const done = tasks.filter((t) => t.done).length;
+
+  clearButton.disaled = tasks.every((t) => !t.done);
+
+  const counters = document.querySelector(".footer-controls__counters");
+
+  if (counters) {
+    counters.innerHTML = `
+      <span>Всего: ${total}</span>
+      <span>Активных: ${active}</span>
+      <span>Выполненных: ${done}</span>
+    `;
+  }
 }
 
 renderAll();

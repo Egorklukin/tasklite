@@ -1,29 +1,136 @@
 <!doctype html>
 <html lang="ru">
-
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>TaskLite — Kanban</title>
-    <link rel="stylesheet" href="css/style.css" />
-</head>
+    <link rel="stylesheet" href="styles/normalize.css" />
+    <link rel="stylesheet" href="styles/style.css" />
+  </head>
 
-<body class="kanban">
+  <body class="kanban">
     <header class="header">
-        <div class="container header__container">
-            <h3 class="header__title">
-                TaskLite
-            </h3>
-        </div>
-        <nav class="tabs">
-            <a href="index.html" class="tab active">To Do</a>
-            <a href="kanban.html" class="tab">Kanban</a>
-            <a href="habits.html" class="tab">Привычки</a>
-        </nav>
+      <div class="container header__container">
+        <h3 class="header__title">TaskLite</h3>
+      </div>
+      <nav class="tabs">
+        <a href="index.html" class="tab active">To Do</a>
+        <a href="kanban.html" class="tab">Kanban</a>
+        <a href="habits.html" class="tab">Привычки</a>
+      </nav>
     </header>
-    <main class="container">
-        <h1 class="page-title">Канбан</h1>
+    <main class="kanban container">
+      <h1 class="kanban__title">Канбан</h1>
+      <div class="board">
+        <div class="column">
+          <div class="column__header">
+            <h2 class="column__title">To Do</h2>
+            <span class="column__counter">0</span>
+          </div>
+          <div class="column__tasks">
+            <div class="column__task task-kanban">
+              <h3 class="task__title">Разработать API авторизации</h3>
+              <p class="task-kanban__descr">
+                Реализовать JWT-токены, refresh/access, роуты для login/register
+              </p>
+              <div class="task-kanban__footer">
+                <span class="task-kanban__priority">Высокий приоритет</span>
+                <span class="task-kanban__deadline">15.03</span>
+              </div>
+            </div>
+            <div class="column__task task-kanban">
+              <h3 class="task__title">Исправить баг с кэшем</h3>
+              <p class="task-kanban__descr">
+                Пользователи видят устаревшие данные после обновления страницы
+              </p>
+              <div class="task-kanban__footer">
+                <span class="task-kanban__priority">Высокий приоритет</span>
+                <span class="task-kanban__deadline">18.03</span>
+              </div>
+            </div>
+            <div class="column__task task-kanban">
+              <h3 class="task__title">Обновить документацию</h3>
+              <p class="task-kanban__descr">
+                Добавить примеры запросов в Swagger, описать ошибки API
+              </p>
+              <div class="task-kanban__footer">
+                <span class="task-kanban__priority">Высокий приоритет</span>
+                <span class="task-kanban__deadline">20.03</span>
+              </div>
+            </div>
+          </div>
+          <button class="column__btn">+ Добавить задачу</button>
+        </div>
+        <div class="column">
+          <div class="column__header">
+            <h2 class="column__title">In Progress</h2>
+            <span class="column__counter">0</span>
+          </div>
+          <div class="column__tasks">
+            <div class="column__tasks">
+              <div class="column__task task-kanban">
+                <h3 class="task__title">Обновить зависимости</h3>
+                <p class="task-kanban__descr">Реализовать JWT-токены</p>
+                <div class="task-kanban__footer">
+                  <span class="task-kanban__priority">High priority</span>
+                  <span class="task-kanban__deadline">15.03</span>
+                </div>
+              </div>
+              <div class="column__task task-kanban">
+                <h3 class="task__title">Исправить баг</h3>
+                <p class="task-kanban__descr">
+                  Пользователи видят устаревшие данные после обновления страницы
+                </p>
+                <div class="task-kanban__footer">
+                  <span class="task-kanban__priority">High priority</span>
+                  <span class="task-kanban__deadline">18.03</span>
+                </div>
+              </div>
+              <div class="column__task task-kanban">
+                <h3 class="task__title">Оптимизация запросов</h3>
+                <p class="task-kanban__descr">
+                  Добавить примеры запросов в Swagger, описать ошибки API
+                </p>
+                <div class="task-kanban__footer">
+                  <span class="task-kanban__priority">High priority</span>
+                  <span class="task-kanban__deadline">20.03</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="column__btn">+ Добавить задачу</button>
+        </div>
+        <div class="column">
+          <div class="column__header">
+            <h2 class="column__title">Done</h2>
+            <span class="column__counter">2</span>
+          </div>
+          <div class="column__tasks">
+            <div class="column__tasks">
+              <div class="column__task task-kanban">
+                <h3 class="task__title">Рефакторинг</h3>
+                <p class="task-kanban__descr">Реализовать JWT-токены</p>
+                <div class="task-kanban__footer">
+                  <span class="task-kanban__priority">Высокий приоритет</span>
+                  <span class="task-kanban__deadline">15.03</span>
+                </div>
+              </div>
+              <div class="column__task task-kanban">
+                <h3 class="task__title">Добавить unit-тесты</h3>
+                <p class="task-kanban__descr">
+                  Пользователи видят устаревшие данные после обновления страницы
+                </p>
+                <div class="task-kanban__footer">
+                  <span class="task-kanban__priority">Средний приоритет</span>
+                  <span class="task-kanban__deadline">18.03</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="column__btn">+ Добавить задачу</button>
+        </div>
+      </div>
     </main>
-</body>
-
+    <script src="kanban.js"></script>
+  </body>
 </html>
