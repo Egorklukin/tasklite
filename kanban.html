@@ -22,7 +22,7 @@
     <main class="kanban container">
       <h1 class="kanban__title">Канбан</h1>
       <div class="board">
-        <div class="column">
+        <div class="column" data-status="todo">
           <div class="column__header">
             <h2 class="column__title">To Do</h2>
             <span class="column__counter">0</span>
@@ -61,7 +61,7 @@
           </div>
           <button class="column__btn">+ Добавить задачу</button>
         </div>
-        <div class="column">
+        <div class="column" data-status="in progress">
           <div class="column__header">
             <h2 class="column__title">In Progress</h2>
             <span class="column__counter">0</span>
@@ -72,7 +72,9 @@
                 <h3 class="task__title">Обновить зависимости</h3>
                 <p class="task-kanban__descr">Реализовать JWT-токены</p>
                 <div class="task-kanban__footer">
-                  <span class="task-kanban__priority">High priority</span>
+                  <span class="task-kanban__priority medium"
+                    >Medium priority</span
+                  >
                   <span class="task-kanban__deadline">15.03</span>
                 </div>
               </div>
@@ -82,7 +84,7 @@
                   Пользователи видят устаревшие данные после обновления страницы
                 </p>
                 <div class="task-kanban__footer">
-                  <span class="task-kanban__priority">High priority</span>
+                  <span class="task-kanban__priority high">High priority</span>
                   <span class="task-kanban__deadline">18.03</span>
                 </div>
               </div>
@@ -92,7 +94,7 @@
                   Добавить примеры запросов в Swagger, описать ошибки API
                 </p>
                 <div class="task-kanban__footer">
-                  <span class="task-kanban__priority">High priority</span>
+                  <span class="task-kanban__priority low">Low priority</span>
                   <span class="task-kanban__deadline">20.03</span>
                 </div>
               </div>
@@ -100,7 +102,7 @@
           </div>
           <button class="column__btn">+ Добавить задачу</button>
         </div>
-        <div class="column">
+        <div class="column" data-status="done">
           <div class="column__header">
             <h2 class="column__title">Done</h2>
             <span class="column__counter">2</span>
