@@ -1,8 +1,11 @@
 const columns = document.querySelectorAll(".column");
 
+let draggedTask = null;
+let sourceStatus = null;
+
 let boardData = JSON.parse(localStorage.getItem("kanbanData")) || {
   todo: [],
-  "in progress": [],
+  "in-progress": [],
   done: [],
 };
 
@@ -15,7 +18,7 @@ document.querySelectorAll(".column__btn").forEach((btn) => {
     const clearTitle = title.trim();
     if (!clearTitle) return;
     const descr = prompt("Введите описание задачи") || "";
-    const priority = prompt("Введите приоритет(Высокий/Средний/Низкий");
+    const priority = prompt("Введите приоритет(Высокий/Средний/Низкий") || "";
     const deadline = prompt("Срок: dd.mm") || "";
 
     const clearDescr = descr.trim();
@@ -50,10 +53,19 @@ function priorityLabel(level) {
       : "Средний приоритет";
 }
 
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
 function renderBoard() {
   columns.forEach((column) => {
     const status = column.dataset.status;
     const taskList = column.querySelector(".column__tasks");
+
+    if (!taskList || !boardData[status]) return;
 
     taskList.innerHTML = "";
 
@@ -61,6 +73,7 @@ function renderBoard() {
       const el = document.createElement("div");
       el.className = "column__task task-kanban";
       el.dataset.index = index;
+      el.draggable = true;
       el.innerHTML = `
         <h3 class="task__title">${escapeHtml(task.title)}</h3>
         ${
@@ -74,13 +87,14 @@ function renderBoard() {
         <div class="task-kanban__footer">
             <span class="task-kanban__priority ${task.priority}">${priorityLabel(task.priority)}</span>
             <span class="task-kanban__deadline">${escapeHtml(task.deadline)}</span>
-        </div
+        </div>
       `;
+      addDragEvents(el);
       taskList.appendChild(el);
     });
     updateCount(column);
   });
-  localStorage.setItem("kanban-data", JSON.stringify(boardData));
+  localStorage.setItem("kanbanData", JSON.stringify(boardData));
 }
 
 function updateCount(column) {
@@ -89,11 +103,48 @@ function updateCount(column) {
   countEl.textContent = boardData[status].length;
 }
 
-function escapeHtml(str) {
-  return String(str)
-    .replace(/&/g, "&apm")
-    .replace(/</g, "&lt")
-    .replace(/>/g, "&gt");
+function addDragEvents(taskEl) {
+  taskEl.addEventListener("dragstart", (e) => {
+    draggedTask = taskEl;
+    sourceStatus = taskEl.closest(".column").dataset.status;
+    taskEl.classList.add("dragging");
+    e.dataTransfer.effectAllowed = "move";
+  });
+  taskEl.addEventListener("dragend", () => {
+    if (draggedTask) draggedTask.classList.remove("dragging");
+    draggedTask = null;
+  });
+  columns.forEach((column) => {
+    const taskList = column.querySelector(".column__tasks");
+
+    if (!taskList) return;
+
+    taskList.addEventListener("dragover", (e) => {
+      e.preventDefault();
+      column.classList.add("drag-over");
+    });
+    taskList.addEventListener("dragleave", () => {
+      column.classList.remove("drag-over");
+    });
+    taskList.addEventListener("drop", (e) => {
+      e.preventDefault();
+      column.classList.remove("drag-over");
+
+      const targetStatus = column.dataset.status;
+
+      if (!draggedTask) return;
+
+      const index = +draggedTask.dataset.index;
+      if (!boardData[sourceStatus]?.[index]) return;
+      const movedTask = boardData[sourceStatus][index];
+
+      boardData[sourceStatus].splice(index, 1);
+
+      boardData[targetStatus].push(movedTask);
+
+      renderBoard();
+    });
+  });
 }
 
 renderBoard();
