@@ -34,12 +34,11 @@ document.querySelectorAll(".column__btn").forEach((btn) => {
     renderBoard();
   });
 });
-
 function normalizePriority(value) {
   const v = String(value || "")
     .trim()
     .toLowerCase();
-  if (["h", "high", "выс", "в", "высокий"].includes(v)) return "high";
+  if (v.includes("в") || v.includes("h")) return "high";
   if (v.includes("н") || v.includes("l")) return "low";
   if (v.includes("м") || v.includes("m")) return "medium";
   return "medium";
@@ -68,6 +67,7 @@ function renderBoard() {
     if (!taskList || !boardData[status]) return;
 
     taskList.innerHTML = "";
+    console.log(boardData[status]);
 
     boardData[status].forEach((task, index) => {
       const el = document.createElement("div");
@@ -93,6 +93,7 @@ function renderBoard() {
       taskList.appendChild(el);
     });
     updateCount(column);
+    console.log(boardData[status].length);
   });
   localStorage.setItem("kanbanData", JSON.stringify(boardData));
 }
@@ -100,7 +101,7 @@ function renderBoard() {
 function updateCount(column) {
   const countEl = column.querySelector(".column__counter");
   const status = column.dataset.status;
-  countEl.textContent = boardData[status].length;
+  countEl.textContent = `Всего задач: ${boardData[status].length}`;
 }
 
 function addDragEvents(taskEl) {

@@ -3,24 +3,24 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>TaskLite — Kanban</title>
+    <title>TaskLite - Kanban</title>
     <link rel="stylesheet" href="styles/normalize.css" />
     <link rel="stylesheet" href="styles/style.css" />
   </head>
 
   <body class="kanban">
-    <header class="header">
-      <div class="container header__container">
+    <header class="header__container header container">
+      <div class="header__container">
         <h3 class="header__title">TaskLite</h3>
       </div>
       <nav class="tabs">
-        <a href="index.html" class="tab active">To Do</a>
-        <a href="kanban.html" class="tab">Kanban</a>
-        <a href="habits.html" class="tab">Привычки</a>
+        <a href="index.html" class="tab">To Do</a>
+        <a href="kanban.html" class="tab active">Kanban</a>
+        <a class="tab" aria-disabled="true">Привычки</a>
       </nav>
     </header>
     <main class="kanban container">
-      <h1 class="kanban__title">Канбан</h1>
+      <h1 class="kanban__title title">Канбан</h1>
       <div class="board">
         <div class="column" data-status="todo">
           <div class="column__header">
@@ -28,7 +28,7 @@
             <span class="column__counter">0</span>
           </div>
           <div class="column__tasks">
-            <div class="column__task task-kanban">
+            <!-- <div class="column__task task-kanban">
               <h3 class="task__title">Разработать API авторизации</h3>
               <p class="task-kanban__descr">
                 Реализовать JWT-токены, refresh/access, роуты для login/register
@@ -37,8 +37,8 @@
                 <span class="task-kanban__priority">Высокий приоритет</span>
                 <span class="task-kanban__deadline">15.03</span>
               </div>
-            </div>
-            <div class="column__task task-kanban">
+            </div> -->
+            <!-- <div class="column__task task-kanban">
               <h3 class="task__title">Исправить баг с кэшем</h3>
               <p class="task-kanban__descr">
                 Пользователи видят устаревшие данные после обновления страницы
@@ -47,8 +47,8 @@
                 <span class="task-kanban__priority">Высокий приоритет</span>
                 <span class="task-kanban__deadline">18.03</span>
               </div>
-            </div>
-            <div class="column__task task-kanban">
+            </div> -->
+            <!-- <div class="column__task task-kanban">
               <h3 class="task__title">Обновить документацию</h3>
               <p class="task-kanban__descr">
                 Добавить примеры запросов в Swagger, описать ошибки API
@@ -57,7 +57,7 @@
                 <span class="task-kanban__priority">Высокий приоритет</span>
                 <span class="task-kanban__deadline">20.03</span>
               </div>
-            </div>
+            </div> -->
           </div>
           <button class="column__btn">+ Добавить задачу</button>
         </div>
@@ -67,8 +67,7 @@
             <span class="column__counter">0</span>
           </div>
           <div class="column__tasks">
-            <div class="column__tasks">
-              <div class="column__task task-kanban">
+            <!-- <div class="column__task task-kanban">
                 <h3 class="task__title">Обновить зависимости</h3>
                 <p class="task-kanban__descr">Реализовать JWT-токены</p>
                 <div class="task-kanban__footer">
@@ -97,8 +96,7 @@
                   <span class="task-kanban__priority low">Low priority</span>
                   <span class="task-kanban__deadline">20.03</span>
                 </div>
-              </div>
-            </div>
+              </div> -->
           </div>
           <button class="column__btn">+ Добавить задачу</button>
         </div>
@@ -108,25 +106,28 @@
             <span class="column__counter">2</span>
           </div>
           <div class="column__tasks">
-            <div class="column__tasks">
-              <div class="column__task task-kanban">
-                <h3 class="task__title">Рефакторинг</h3>
-                <p class="task-kanban__descr">Реализовать JWT-токены</p>
-                <div class="task-kanban__footer">
-                  <span class="task-kanban__priority">Высокий приоритет</span>
-                  <span class="task-kanban__deadline">15.03</span>
-                </div>
-              </div>
-              <div class="column__task task-kanban">
-                <h3 class="task__title">Добавить unit-тесты</h3>
-                <p class="task-kanban__descr">
-                  Пользователи видят устаревшие данные после обновления страницы
-                </p>
-                <div class="task-kanban__footer">
-                  <span class="task-kanban__priority">Средний приоритет</span>
-                  <span class="task-kanban__deadline">18.03</span>
-                </div>
-              </div>
+            <div class="placeholder">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="14"
+                height="14"
+                viewBox="0 0 14 14"
+              >
+                <title>Blank-notepad SVG Icon</title>
+                <g fill="none">
+                  <path
+                    fill="#d7e0ff"
+                    d="M12.5 2h-11a1 1 0 0 0-1 1v9.5a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1"
+                  />
+                  <path
+                    stroke="#4147d5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M4 3.5v-3m3 3v-3m3 3v-3M12.5 2h-11a1 1 0 0 0-1 1v9.5a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1"
+                  />
+                </g>
+              </svg>
+              <h3 class="placeholder__descr">Здесь будут ваши задачи</h3>
             </div>
           </div>
           <button class="column__btn">+ Добавить задачу</button>
@@ -134,6 +135,6 @@
       </div>
     </main>
     <script src="kanban.js"></script>
-    <script src="task.js"></script>
+    <!--     <script src="task.js"></script> -->
   </body>
 </html>

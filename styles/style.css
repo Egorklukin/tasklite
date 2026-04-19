@@ -94,6 +94,12 @@ body {
   color: #7e66cd;
 }
 
+.kanban .tab.active {
+  background: #bae2f5;
+  border: 1px solid rgba(58, 149, 241, 0.55);
+  color: #258bf1;
+}
+
 .todo {
   background:
     radial-gradient(1200px 900px at 20% 25%, #ebe6f5 0%, transparent 60%),
@@ -470,4 +476,21 @@ body {
 
 .column.drag-over.column__title {
   border-left-color: #2563eb;
+}
+
+.placeholder {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.placeholder__descr {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+[aria-disabled="true"] {
+  cursor: not-allowed;
+  color: gray;
 }
