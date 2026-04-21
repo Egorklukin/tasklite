@@ -76,12 +76,11 @@ function renderBoard() {
       el.draggable = true;
       el.innerHTML = `
         <h3 class="task__title">${escapeHtml(task.title)}</h3>
-        ${
-          task.descr
-            ? `<p class="task-kanban__descr">
+        ${task.descr
+          ? `<p class="task-kanban__descr">
                 ${escapeHtml(task.descr)}
             </p>`
-            : ""
+          : ""
         }
             
         <div class="task-kanban__footer">
@@ -104,6 +103,39 @@ function updateCount(column) {
   countEl.textContent = `Всего задач: ${boardData[status].length}`;
 }
 
+columns.forEach((column) => {
+  const taskList = column.querySelector(".column__tasks");
+
+  if (!taskList) return;
+
+  taskList.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    column.classList.add("drag-over");
+  });
+  taskList.addEventListener("dragleave", () => {
+    column.classList.remove("drag-over");
+  });
+  taskList.addEventListener("drop", (e) => {
+    e.preventDefault();
+    column.classList.remove("drag-over");
+
+    const targetStatus = column.dataset.status;
+
+    if (!draggedTask) return;
+
+    const index = +draggedTask.dataset.index;
+    if (!boardData[sourceStatus]?.[index]) return;
+    const movedTask = boardData[sourceStatus][index];
+
+    boardData[sourceStatus].splice(index, 1);
+
+    boardData[targetStatus].push(movedTask);
+
+    renderBoard();
+  });
+});
+
+
 function addDragEvents(taskEl) {
   taskEl.addEventListener("dragstart", (e) => {
     draggedTask = taskEl;
@@ -114,37 +146,6 @@ function addDragEvents(taskEl) {
   taskEl.addEventListener("dragend", () => {
     if (draggedTask) draggedTask.classList.remove("dragging");
     draggedTask = null;
-  });
-  columns.forEach((column) => {
-    const taskList = column.querySelector(".column__tasks");
-
-    if (!taskList) return;
-
-    taskList.addEventListener("dragover", (e) => {
-      e.preventDefault();
-      column.classList.add("drag-over");
-    });
-    taskList.addEventListener("dragleave", () => {
-      column.classList.remove("drag-over");
-    });
-    taskList.addEventListener("drop", (e) => {
-      e.preventDefault();
-      column.classList.remove("drag-over");
-
-      const targetStatus = column.dataset.status;
-
-      if (!draggedTask) return;
-
-      const index = +draggedTask.dataset.index;
-      if (!boardData[sourceStatus]?.[index]) return;
-      const movedTask = boardData[sourceStatus][index];
-
-      boardData[sourceStatus].splice(index, 1);
-
-      boardData[targetStatus].push(movedTask);
-
-      renderBoard();
-    });
   });
 }
 
