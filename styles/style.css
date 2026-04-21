@@ -377,6 +377,7 @@ body {
     box-shadow 0.2s,
     transform 0.2s;
 }
+
 .task-kanban:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -396,6 +397,7 @@ body {
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   padding-bottom: 10px;
 }
+
 .task-kanban__footer {
   display: flex;
   justify-content: space-between;
@@ -411,6 +413,7 @@ body {
   background-color: #f1f5f9;
   color: #1e293b;
 }
+
 .task-kanban__deadline {
   font-size: 12.5px;
   color: #64748b;
@@ -493,4 +496,22 @@ body {
 [aria-disabled="true"] {
   cursor: not-allowed;
   color: gray;
+}
+
+.tasks__placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tasks__placeholder h2 {
+  font-size: 26px;
+  margin-left: 5px;
+  color: #4a4654;
+}
+
+.tasks__placeholder p {
+  font-size: 16px;
+  margin-left: 5px;
+  color: #6f6781;
 }
