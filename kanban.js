@@ -66,7 +66,29 @@ function renderBoard() {
 
     if (!taskList || !boardData[status]) return;
 
-    taskList.innerHTML = "";
+    taskList.innerHTML = boardData[status].length === 0 ? `<div class="placeholder">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="14"
+                height="14"
+                viewBox="0 0 14 14"
+              >
+                <title>Blank-notepad SVG Icon</title>
+                <g fill="none">
+                  <path
+                    fill="#d7e0ff"
+                    d="M12.5 2h-11a1 1 0 0 0-1 1v9.5a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1"
+                  />
+                  <path
+                    stroke="#4147d5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M4 3.5v-3m3 3v-3m3 3v-3M12.5 2h-11a1 1 0 0 0-1 1v9.5a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1"
+                  />
+                </g>
+              </svg>
+              <h3 class="placeholder__descr">Здесь будут ваши задачи</h3>
+            </div>` : "";
     console.log(boardData[status]);
 
     boardData[status].forEach((task, index) => {
@@ -103,8 +125,19 @@ function updateCount(column) {
   countEl.textContent = `Всего задач: ${boardData[status].length}`;
 }
 
-columns.forEach((column) => {
-  const taskList = column.querySelector(".column__tasks");
+function addDragEvents(taskEl) {
+  taskEl.addEventListener("dragstart", (e) => {
+    draggedTask = taskEl;
+    sourceStatus = taskEl.closest(".column").dataset.status;
+    taskEl.classList.add("dragging");
+    e.dataTransfer.effectAllowed = "move";
+  });
+  taskEl.addEventListener("dragend", () => {
+    if (draggedTask) draggedTask.classList.remove("dragging");
+    draggedTask = null;
+  });
+  columns.forEach((column) => {
+    const taskList = column.querySelector(".column__tasks");
 
   if (!taskList) return;
 
@@ -134,6 +167,19 @@ columns.forEach((column) => {
     renderBoard();
   });
 });
+
+
+function addDragEvents(taskEl) {
+  taskEl.addEventListener("dragstart", (e) => {
+    draggedTask = taskEl;
+    sourceStatus = taskEl.closest(".column").dataset.status;
+    taskEl.classList.add("dragging");
+    e.dataTransfer.effectAllowed = "move";
+  });
+  taskEl.addEventListener("dragend", () => {
+    if (draggedTask) draggedTask.classList.remove("dragging");
+    draggedTask = null;
+  });
 
 
 function addDragEvents(taskEl) {
