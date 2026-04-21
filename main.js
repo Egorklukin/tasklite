@@ -8,6 +8,7 @@ const tabButtons = document.querySelectorAll(".tabs__item");
 const clearButton = document.querySelector(".footer-controls__clear");
 const form = document.querySelector(".form-add");
 
+
 let sortOrder = "new";
 let currentFilter = "all";
 
@@ -164,6 +165,12 @@ function renderAll() {
     filtered = filtered.filter((task) => {
       return task.text.toLowerCase().includes(query);
     });
+    if (filtered.length === 0) {
+      console.log(`По запросу '${query}' ничего не найдено`)
+      container.innerHTML = `<div class="tasks__placeholder">
+          <p>По запросу '${query}' ничего не найдено</p>
+        </div>`
+    }
   }
 
   const sortedTasks = [...filtered].sort((a, b) => {
@@ -177,6 +184,16 @@ function renderAll() {
     footer.before(card);
   });
 
+  if (tasks.filter((t) => t.done).length === 0) clearButton.setAttribute("disabled", "")
+  else clearButton.removeAttribute("disabled")
+  if (sortedTasks.length === 0) container.innerHTML = query ? `<div class="tasks__placeholder">
+          <p>По запросу '${query}' ничего не найдено</p>
+        </div>` : `
+  <div class="tasks__placeholder">
+          <h2>Здесь ничего нет</h2>
+          <p>Добавьте свою первую задачу</p>
+        </div>`
+  else container.innerHTML = ""
   updateCounters();
 }
 
